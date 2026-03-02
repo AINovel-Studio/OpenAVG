@@ -1,7 +1,8 @@
-import { StageType } from '../../../../constants'
-import { stageManager } from '../../../../stage'
+import { adapterRegistry } from '@/adapters'
+import { StageType } from '@/constants'
+import { stageManager } from '@/stage'
 
 export function onExit() {
   stageManager.currentStage = StageType.GLOBAL
-  window.location.href = 'about:blank'
+  adapterRegistry.platform.navigateTo('about:blank')
 }

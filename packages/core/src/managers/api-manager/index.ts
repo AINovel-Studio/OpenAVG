@@ -1,4 +1,4 @@
-import type { IApiCore } from '@openavg/types'
+import type { IApiCore } from '@/types'
 
 class ApiManager {
   apiCore: IApiCore

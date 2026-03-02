@@ -1,7 +1,7 @@
-import { StageType } from '../../../../constants'
+import { StageType } from '@/constants'
 
-import { stageManager } from '../../../../stage'
-import { actions } from '../../main-menu/actions'
+import { actions } from '@/modules/menu/main-menu/actions'
+import { stageManager } from '@/stage'
 
 export async function onReturn() {
   stageManager.currentStage = stageManager.lastStage

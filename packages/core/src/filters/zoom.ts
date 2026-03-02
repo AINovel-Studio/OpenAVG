@@ -1,6 +1,5 @@
-import type { ObservablePoint, Sprite } from 'pixi.js'
+import type { Sprite } from 'pixi.js'
 import { Easing, Tween } from '@tweenjs/tween.js'
-import { cloneDeep } from 'lodash'
 
 // 使用 TweenJS 调整缩放
 function adjustScaleWithTween({
@@ -9,7 +8,7 @@ function adjustScaleWithTween({
   duration,
 }: {
   sprite: Sprite
-  targetScale: ObservablePoint
+  targetScale: { x: number, y: number }
   duration: number
 }) {
   return new Tween({ scaleX: sprite.scale.x, scaleY: sprite.scale.y })
@@ -31,7 +30,7 @@ export async function scaleToNormal({
   duration?: number
 }) {
   // 设置目标
-  const targetScale = cloneDeep(sprite.scale)
+  const targetScale = { x: sprite.scale.x, y: sprite.scale.y }
 
   // 先设置初始的缩放值
   sprite.scale.set(initialScale)

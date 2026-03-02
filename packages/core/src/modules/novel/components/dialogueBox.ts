@@ -1,8 +1,8 @@
-import type { ITalk } from '@openavg/types'
 import type {
   Application,
   Sprite,
 } from 'pixi.js'
+import type { ITalk } from '@/types'
 import {
   Color,
   Container,

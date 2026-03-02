@@ -1,8 +1,8 @@
-import type { IImage } from '@openavg/types'
+import type { IImage } from '@/types'
 
 import { Sprite } from 'pixi.js'
-import { scaleToBottom } from '../../../../utils/resize'
-import Hooks from '../../Hooks'
+import Hooks from '@/modules/novel/Hooks'
+import { scaleToBottom } from '@/utils/resize'
 
 export async function handleImages({
   assetName,

@@ -2,7 +2,7 @@
 
 【OpenAVG】一个可以做Galgame和RPG 的 通用冒险游戏引擎
 
-[制作的Demo演示](https://demo.openavg.panzer-jack.cn/) 
+[制作的Demo演示](https://demo.openavg.panzer-jack.cn/)
 
 [引擎文档（#TODO）](https://doc.openavg.panzer-jack.cn/)
 
@@ -18,6 +18,7 @@
 - pnpm >= 7.x
 
 ### 安装步骤
+
 ```bash
 git clone https://github.com/Panzer-Jack/OpenAVG.git
 cd OpenAVG
@@ -25,6 +26,7 @@ pnpm install
 ```
 
 ### 目录结构
+
 ```
 OpenAVG/
 ├── packages/
@@ -37,12 +39,15 @@ OpenAVG/
 ```
 
 ## 使用
+
 1. 测试游戏
+
 ```bash
 pnpm dev
 ```
+
 2. 打包
+
 ```bash
 pnpm build:game
 ```
-

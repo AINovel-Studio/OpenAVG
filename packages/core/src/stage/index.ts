@@ -1,13 +1,13 @@
-import type { IApiCore, IGlobalConfig, IStages } from '@openavg/types'
 import type { Application } from 'pixi.js'
+import type { IApiCore, IGlobalConfig, IStages } from '../types'
 import { Container, Sprite } from 'pixi.js'
 
 import { apiManager } from '../managers/api-manager'
 import { assetsManager } from '../managers/assets-manager'
 import { effectsManager } from '../managers/effects-manager'
 import { eventManager } from '../managers/event-manager'
-import { tickerManager } from '../managers/ticker-manager'
 import { soundManager } from '../managers/sound-manager'
+import { tickerManager } from '../managers/ticker-manager'
 import { ApiEnum, StageType } from './../constants'
 import { MenuLayerManager } from './menu-layer'
 

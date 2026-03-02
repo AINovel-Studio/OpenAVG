@@ -1,8 +1,7 @@
-import type { SaveData } from '@openavg/types'
+import type { SaveData } from '@/types'
+import { StageType } from '@/constants'
+import { stageManager } from '@/stage'
 import { mainMenu } from '..'
-import { StageType } from '../../../../constants'
-import { tickerManager } from '../../../../managers/ticker-manager'
-import { stageManager } from '../../../../stage'
 
 export async function onContinue(saveData: SaveData) {
   if (!mainMenu.btnLock && saveData) {

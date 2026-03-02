@@ -1,16 +1,19 @@
-import { initDevtools } from '@pixi/devtools'
 import { soundAsset } from '@pixi/sound'
 import { Application, extensions } from 'pixi.js'
 
 export class PixiInstance {
   public app: Application
+  private devtoolsInit?: (app: Application) => void
 
   constructor() {
     this.app = new Application()
   }
 
+  setDevtools(init: (app: Application) => void) {
+    this.devtoolsInit = init
+  }
+
   async install(canvas: HTMLCanvasElement) {
-    // BUG：resizeTo 重定义
     try {
       if (!this.isAppInitialized()) {
         await this.app.init({
@@ -18,10 +21,9 @@ export class PixiInstance {
           backgroundAlpha: 0,
           resizeTo: canvas,
           antialias: false,
-          // resolution: window.devicePixelRatio,
         })
         extensions.add(soundAsset)
-        initDevtools({ app: this.app })
+        this.devtoolsInit?.(this.app)
       }
     } catch (error) {
       console.warn(error)

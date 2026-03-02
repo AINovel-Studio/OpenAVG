@@ -1,0 +1,5 @@
+export type { IPlatformAdapter } from './platform'
+export { BrowserPlatformAdapter } from './platform'
+export { adapterRegistry } from './registry'
+export type { IStorageAdapter } from './storage'
+export { LocalForageStorageAdapter } from './storage'

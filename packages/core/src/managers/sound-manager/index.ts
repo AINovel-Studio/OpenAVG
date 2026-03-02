@@ -1,13 +1,14 @@
-import type { ISounds } from '@openavg/types'
 import type { Sound } from '@pixi/sound'
 import type { Application } from 'pixi.js'
+import type { ISounds } from '@/types'
 
 class SoundManager {
   app: Application
   currentTargets: ISounds = {
     bgm: [],
-    voice: []
+    voice: [],
   }
+
   targetsVolume = {
     bgm: 0.4,
     voice: 1,
@@ -24,7 +25,7 @@ class SoundManager {
   setVolume({
     bgm,
     voice,
-    main
+    main,
   }: {
     bgm: number
     voice: number

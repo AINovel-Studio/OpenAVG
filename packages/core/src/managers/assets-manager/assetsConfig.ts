@@ -1,9 +1,8 @@
-import type { IAssets, IGlobalConfig } from '@openavg/types'
 import type { Sound } from '@pixi/sound'
 import type { Texture } from 'pixi.js'
-import { isEmpty } from 'lodash'
+import type { IAssets, IGlobalConfig } from '@/types'
 
-import { StageType } from '../../constants'
+import { StageType } from '@/constants'
 
 /** 包参数：游戏音频 */
 export interface IPackGameAudio {
@@ -95,32 +94,32 @@ export class AssetsPacks {
 
   /** 加载函数 */
   async loadAllPacks({ loadBundle }: { loadBundle: BundleLoader }) {
-    if (!isEmpty(this.gameAudioRaw)) {
+    if (this.gameAudioRaw.length > 0) {
       await loadBundle('GAME_AUDIO', this.gameAudioRaw)
     }
-    if (!isEmpty(this.characterSoundRaw)) {
+    if (this.characterSoundRaw.length > 0) {
       await loadBundle('CHARACTER_SOUND', this.characterSoundRaw)
     }
-    if (!isEmpty(this.spriteTextrueRaw)) {
+    if (Object.keys(this.spriteTextrueRaw).length > 0) {
       await loadBundle('SPRITE_TEXTURE', this.spriteTextrueRaw)
     }
-    if (!isEmpty(this.videoTextrueRaw)) {
+    if (Object.keys(this.videoTextrueRaw).length > 0) {
       await loadBundle('VIDEO_TEXTURE', this.videoTextrueRaw)
     }
   }
 
   /** 卸载函数 */
   async unloadAllPacks({ unloadBundle }: { unloadBundle: BundleUnloader }) {
-    if (!isEmpty(this.GAME_AUDIO)) {
+    if (Object.keys(this.GAME_AUDIO).length > 0) {
       await unloadBundle('GAME_AUDIO')
     }
-    if (!isEmpty(this.CHARACTER_SOUND)) {
+    if (Object.keys(this.CHARACTER_SOUND).length > 0) {
       await unloadBundle('CHARACTER_SOUND')
     }
-    if (!isEmpty(this.SPRITE_TEXTURE)) {
+    if (Object.keys(this.SPRITE_TEXTURE).length > 0) {
       await unloadBundle('SPRITE_TEXTURE')
     }
-    if (!isEmpty(this.VIDEO_TEXTURE)) {
+    if (Object.keys(this.VIDEO_TEXTURE).length > 0) {
       await unloadBundle('VIDEO_TEXTURE')
     }
   }
@@ -133,7 +132,7 @@ type BundleContentsArray = {
 /** 分包加载器 */
 type BundleLoader = (
   bundleName: string,
-  bundleContents: Record<string, string> | BundleContentsArray
+  bundleContents: Record<string, string> | BundleContentsArray,
 ) => Promise<any>
 
 /** 分包卸载器 */

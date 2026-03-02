@@ -1,8 +1,8 @@
-import type { IMusic } from '@openavg/types'
 import type { Sound } from '@pixi/sound'
+import type { IMusic } from '@/types'
 
-import Hooks from '../../Hooks'
-import { soundManager } from '../../../../managers/sound-manager'
+import { soundManager } from '@/managers/sound-manager'
+import Hooks from '@/modules/novel/Hooks'
 
 export function handleMusic({ assetName }: { assetName: IMusic }) {
   const hooks = Hooks.getInstance()

@@ -1,8 +1,8 @@
 // 单例模型: Novel内 全局钩子 Hooks
 import type { Application, Sprite } from 'pixi.js'
-import type { AssetsPacks } from '../../../managers/assets-manager/assetsConfig'
 import type { SceneManager } from '../managers/scene-manager'
-import { resizeToCanvas } from '../../../utils/resize'
+import type { AssetsPacks } from '@/managers/assets-manager/assetsConfig'
+import { resizeToCanvas } from '@/utils/resize'
 
 export default class Hooks {
   private static instance: Hooks | null = null

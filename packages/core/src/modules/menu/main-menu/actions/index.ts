@@ -1,5 +1,6 @@
-import localforage from 'localforage'
-import { openAVGCore } from '../../../../'
+import type { SaveDataList } from '@/types'
+import { openAVGCore } from '@/index'
+import { getSaveDataList } from '@/utils/gameStorage'
 import { onAFStory } from './onAFStory'
 import { onConfig } from './onConfig'
 import { onContinue } from './onContinue'
@@ -10,7 +11,6 @@ import { onLoad } from './onLoad'
 import { onSave } from './onSave'
 import { onStart } from './onStart'
 import { onTitle } from './onTitle'
-import { SaveDataList } from '@openavg/types'
 
 class Actions {
   private _onContinue = onContinue
@@ -32,21 +32,21 @@ class Actions {
 
   async installOnLoad(fn: (saveDataList: SaveDataList, isMainMenu: boolean) => void) {
     this.onLoadInner = async (isMainMenu: boolean) => {
-      const saveDataList: SaveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`)
+      const saveDataList = await getSaveDataList(openAVGCore.gameTitle)
       fn(saveDataList, isMainMenu)
     }
   }
 
   async installOnSave(fn: (saveDataList: SaveDataList) => void) {
     this.onSaveInner = async () => {
-      const saveDataList: SaveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`)
+      const saveDataList = await getSaveDataList(openAVGCore.gameTitle)
       fn(saveDataList)
     }
   }
 
   async installOnConfig(fn: (saveDataList: SaveDataList) => void) {
     this.onConfigInner = async () => {
-      const saveDataList: SaveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`)
+      const saveDataList = await getSaveDataList(openAVGCore.gameTitle)
       fn(saveDataList)
     }
   }

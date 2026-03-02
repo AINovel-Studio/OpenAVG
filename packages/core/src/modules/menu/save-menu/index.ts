@@ -1,7 +1,7 @@
 import type { Application } from 'pixi.js'
-import type { AssetsPacks } from '../../../managers/assets-manager/assetsConfig'
+import type { AssetsPacks } from '@/managers/assets-manager/assetsConfig'
 import { Container } from 'pixi.js'
-import { assetsManager } from '../../../managers/assets-manager'
+import { assetsManager } from '@/managers/assets-manager'
 
 class SaveMenu {
   app: Application
@@ -15,8 +15,8 @@ class SaveMenu {
 
   init({
     app,
-        fatherContainer,
-        assetsPack,
+    fatherContainer,
+    assetsPack,
   }: {
     app: Application
     fatherContainer: Container

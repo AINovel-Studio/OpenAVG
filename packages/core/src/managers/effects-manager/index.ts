@@ -1,5 +1,5 @@
-import type { IEffect } from '@openavg/types'
 import type { Application } from 'pixi.js'
+import type { IEffect } from '@/types'
 
 class EffectsManager {
   app: Application

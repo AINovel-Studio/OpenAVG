@@ -1,8 +1,6 @@
-import type { SaveDataList } from '@openavg/types'
-import localforage from 'localforage'
-import { openAVGCore } from '../../../..'
+import { openAVGCore } from '@/index'
+import { getSaveDataList } from '@/utils/gameStorage'
 
 export async function getDataList() {
-  const dataList: SaveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`)
-  return dataList
+  return getSaveDataList(openAVGCore.gameTitle)
 }

@@ -1,18 +1,17 @@
-import type { IBackground, IBgFilter } from '@openavg/types'
 import type { Tween } from '@tweenjs/tween.js'
 import type { Texture } from 'pixi.js'
+import type { IBackground, IBgFilter } from '@/types'
 
 import { AlphaFilter, Sprite } from 'pixi.js'
-import { fadeIn, fadeOut } from '../../../../filters/fade'
-import { tickerManager } from '../../../../managers/ticker-manager'
-import Hooks from '../../Hooks'
+import { fadeIn, fadeOut } from '@/filters/fade'
+import { tickerManager } from '@/managers/ticker-manager'
+import Hooks from '@/modules/novel/Hooks'
 
 export async function handleBackground({
   assetName,
 }: {
   assetName: IBackground
 }) {
-  // eslint-disable-next-line no-async-promise-executor
   return new Promise<void>(async (resolve) => {
     const hooks = Hooks.getInstance()
     const sceneManager = hooks.sceneManager

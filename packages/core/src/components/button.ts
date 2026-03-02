@@ -1,49 +1,28 @@
 import type { TextStyleFontWeight } from 'pixi.js'
+import type { ButtonProps } from './buttonTypes'
 import { Button } from '@pixi/ui'
-import { Easing, Tween } from '@tweenjs/tween.js'
-import { debounce } from 'lodash'
+import { Tween } from '@tweenjs/tween.js'
 import {
-  Color,
-  FillGradient,
   Graphics,
   Sprite,
   Text,
   TextStyle,
 } from 'pixi.js'
 import { centerView } from '../utils/layout'
-
-interface ButtonProps {
-  text: string
-  textColor?: string
-  disabled?: boolean
-  onClick: () => void
-  onClickAfter?: () => void
-  action?: (event: string) => void
-  colors?: {
-    disable?: string
-    default?: string
-    hover?: string
-    press?: string
-  }
-  height?: number
-  width?: number
-  size?: SizeType
-  type?: TypeType
-  fontSize?: number
-  fontWeight?: string
-  backgroundColor?: string
-  noGradient?: boolean
-  textOffset?: { x?: number, y?: number }
-  checked?: boolean
-}
-
-type SizeType = 'big' | 'middle' | 'small'
-type TypeType = 'round' | 'rectangle' | 'text'
+import {
+  handleDown,
+  handleHover,
+  handleOut,
+  handlePress,
+  handleUp,
+  handleUpOut,
+  setButtonFillColor,
+} from './buttonInteractions'
 
 export class CommonButton extends Button {
   private textView: Text
   private buttonView = new Sprite()
-  private action: (event: string) => void
+  action: (event: string) => void
   onClick: () => void
   private _checked = false
   onClickAfter: () => void
@@ -59,7 +38,7 @@ export class CommonButton extends Button {
 
   type = 'round'
   size = 'middle'
-  noGradient: boolean = false // 新增参数，控制是否使用渐变
+  noGradient: boolean = false
   width = 200
   height = 60
 
@@ -67,11 +46,8 @@ export class CommonButton extends Button {
 
   set disable(newVal) {
     this.enabled = !newVal
-    if (!this.enabled) {
-      this.setButtonFillColor(this.colors.disabled, this.width, this.height)
-    } else {
-      this.setButtonFillColor(this.colors.default, this.width, this.height)
-    }
+    const color = !this.enabled ? this.colors.disabled : this.colors.default
+    this.applyFillColor(color)
   }
 
   get disable() {
@@ -81,10 +57,9 @@ export class CommonButton extends Button {
   constructor(props: ButtonProps) {
     super()
     this.view = this.buttonView
-    this.noGradient = props.noGradient || false // 默认为 false，表示使用渐变
+    this.noGradient = props.noGradient || false
     this.enabled = !props.disabled
 
-    // 设置默认颜色\种类\大小配置
     this.colors = {
       default: props.colors?.default || 'rgb(255, 228, 235, 0.8)',
       hover: props.colors?.hover || 'rgb(255, 200, 200, 1)',
@@ -111,17 +86,10 @@ export class CommonButton extends Button {
 
     const box = new Graphics()
     this.box = box
-    if (!this.enabled) {
-      this.setButtonFillColor(this.colors.disabled, props.width, props.height)
-    } else if (this.checked) {
-      this.setButtonFillColor(this.colors.press, props.width, props.height)
-    } else {
-      this.setButtonFillColor(this.colors.default, props.width, props.height)
-    }
+    this.applyInitialFillColor(props)
 
     this.buttonView.addChild(box)
 
-    // TextStyle for pure text button
     const nameStyle = new TextStyle({
       fontFamily: 'Cochin',
       fontSize,
@@ -134,10 +102,9 @@ export class CommonButton extends Button {
       style: nameStyle,
     })
 
-    // If type is 'text', we don't need any box for background
     if (this.type === 'text') {
-      this.buttonView.removeChild(this.box) // Remove the background box
-      this.textView.position.set(0, 0) // Positioning the text without the background box
+      this.buttonView.removeChild(this.box)
+      this.textView.position.set(0, 0)
     }
 
     centerView({
@@ -163,170 +130,47 @@ export class CommonButton extends Button {
 
   set checked(newVal) {
     this._checked = newVal
-    if (newVal) {
-      this.setButtonFillColor(this.colors.press, this.width, this.height)
+    const color = newVal ? this.colors.press : this.colors.default
+    this.applyFillColor(color)
+  }
+
+  private applyInitialFillColor(props: ButtonProps) {
+    if (!this.enabled) {
+      this.applyFillColor(this.colors.disabled, props.width, props.height)
+    } else if (this.checked) {
+      this.applyFillColor(this.colors.press, props.width, props.height)
     } else {
-      this.setButtonFillColor(this.colors.default, this.width, this.height)
+      this.applyFillColor(this.colors.default, props.width, props.height)
     }
   }
 
-  // 处理不同状态的颜色变化
-  setButtonFillColor(color: string, width?: number, height?: number) {
-    if (this.type === 'text')
-      return // If it's a text button, skip filling the background
-
-    // 对话框大小
-    const radius = this.type === 'round' ? 100 : 0
-
-    if (this.size === 'small') {
-      this.width = 100
-      this.height = 40
-    } else if (this.size === 'big') {
-      this.width = 300
-      this.height = 80
-    }
-
-    width && (this.width = width)
-    height && (this.height = height)
-
-    const boxReact = {
-      width: this.width,
-      height: this.height,
-      radius,
-    }
-
-    if (this.box) {
-      this.box.clear()
-      if (this.noGradient) {
-      // 如果 noGradient 为 true，使用纯色填充
-        this.box.beginFill(new Color(color)).roundRect(0, 0, boxReact.width, boxReact.height, boxReact.radius).endFill()
-      } else {
-      // 否则，使用渐变填充
-        const gradientFill = new FillGradient(0, 0, 0, 80)
-        if (!this.enabled) {
-          gradientFill.addColorStop(0, new Color(color))
-        } else {
-          gradientFill.addColorStop(0, new Color('rgb(255, 228, 235, 0.6)'))
-        }
-        gradientFill.addColorStop(1, new Color(color))
-        this.box.roundRect(0, 0, boxReact.width, boxReact.height, boxReact.radius).fill(gradientFill)
-      }
-    }
+  applyFillColor(color: string, width?: number, height?: number) {
+    const result = setButtonFillColor(this, color, width, height)
+    this.width = result.width
+    this.height = result.height
   }
 
   override down() {
-    this.tween.stop()
-    this.tween.to({ x: 1, y: 1 }).easing(Easing.Back.Out).start()
-    this.setButtonFillColor(this.colors.press, this.width, this.height)
-    if (this.action) {
-      this.action('down')
-    }
+    handleDown(this)
   }
 
   override up() {
-    this.tween.stop()
-    this.tween.to({ x: 1, y: 1 }).easing(Easing.Back.Out).start()
-    if (this.checked) {
-      this.setButtonFillColor(this.colors.press, this.width, this.height)
-    } else {
-      this.setButtonFillColor(this.colors.default, this.width, this.height)
-    }
-    if (this.action) {
-      this.action('up')
-    }
+    handleUp(this)
   }
 
   override upOut() {
-    this.tween.stop()
-    this.tween.to({ x: 1, y: 1 }).easing(Easing.Back.Out).start()
-    if (this.checked) {
-      this.setButtonFillColor(this.colors.press, this.width, this.height)
-    } else {
-      this.setButtonFillColor(this.colors.default, this.width, this.height)
-    }
-    if (this.action) {
-      this.action('upOut')
-    }
+    handleUpOut(this)
   }
 
   override out() {
-    this.tween.stop()
-    this.tween.to({ x: 1, y: 1 }).easing(Easing.Back.Out).start()
-    if (this.checked) {
-      this.setButtonFillColor(this.colors.press, this.width, this.height)
-    } else {
-      this.setButtonFillColor(this.colors.default, this.width, this.height)
-    }
-    if (this.action) {
-      this.action('out')
-    }
+    handleOut(this)
   }
 
   override press() {
-    this.tween.stop()
-    this.tween.to({ x: 1, y: 1 }).easing(Easing.Back.Out).start()
-    this.setButtonFillColor(this.colors.press, this.width, this.height)
-    if (this.action) {
-      this.action('onPress')
-    }
-
-    (debounce(() => {
-      this.onClick()
-      this.onClickAfter()
-    }, 100))()
+    handlePress(this)
   }
 
   override hover() {
-    this.tween.stop()
-    this.tween.to({ x: 1.02, y: 1.02 }).easing(Easing.Back.Out).start()
-    this.setButtonFillColor(this.colors.hover, this.width, this.height)
-    if (this.action) {
-      this.action('hover')
-    }
-  }
-}
-
-export class ButtonGroup {
-  buttons: CommonButton[] = [] // 存储按钮
-  private selectedButton: CommonButton | null = null // 当前选中的按钮
-
-  constructor(buttons: CommonButton[]) {
-    this.buttons = buttons
-    this.initializeButtons() // 初始化按钮组
-  }
-
-  // 初始化按钮，设置按钮点击后的回调
-  private initializeButtons() {
-    this.buttons.forEach((button) => {
-      button.onClickAfter = () => this.handleButtonClick(button) // 设置点击后的回调
-    })
-  }
-
-  // 处理按钮点击事件
-  private handleButtonClick(clickBtn) {
-    this.buttons.forEach((button) => {
-      if (button !== clickBtn) {
-        this.deselectButton(button)
-      } else {
-        this.selectButton(button)
-      }
-    })
-  }
-
-  // 选中按钮
-  private selectButton(button: CommonButton) {
-    button.checked = true // 设置按钮为选中状态
-    this.selectedButton = button // 更新当前选中的按钮
-  }
-
-  // 取消选中按钮
-  private deselectButton(button: CommonButton) {
-    this.selectedButton = null // 清空当前选中的按钮
-    button.checked = false // 设置按钮为未选中状态
-  }
-
-  // 获取当前选中的按钮
-  public getSelectedButton() {
-    return this.selectedButton
+    handleHover(this)
   }
 }

@@ -1,8 +1,8 @@
+import { ApiEnum, StageType } from '@/constants'
+import { apiManager } from '@/managers/api-manager'
+import { tickerManager } from '@/managers/ticker-manager'
+import { stageManager } from '@/stage'
 import { mainMenu } from '..'
-import { ApiEnum, StageType } from '../../../../constants'
-import { apiManager } from '../../../../managers/api-manager'
-import { tickerManager } from '../../../../managers/ticker-manager'
-import { stageManager } from '../../../../stage'
 
 export async function onStart() {
   if (!mainMenu.btnLock) {

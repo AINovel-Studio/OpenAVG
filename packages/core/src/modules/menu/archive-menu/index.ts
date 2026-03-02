@@ -1,14 +1,14 @@
 // import type { Application, Sprite } from 'pixi.js'
-// import type { AssetsPacks } from '../../../managers/assets-manager/assetsConfig'
+// import type { AssetsPacks } from '@/managers/assets-manager/assetsConfig'
 // import { ButtonContainer, List } from '@pixi/ui'
 // import { AlphaFilter, Container, Graphics, Text } from 'pixi.js'
 
-// import { ButtonGroup, CommonButton } from '../../../components/button'
-// import { fadeIn, fadeOut } from '../../../filters/fade'
-// import { assetsManager } from '../../../managers/assets-manager'
-// import { effectsManager } from '../../../managers/effects-manager'
-// import { tickerManager } from '../../../managers/ticker-manager'
-// import { centerView, row } from '../../../utils/layout'
+// import { ButtonGroup, CommonButton } from '@/components/button'
+// import { fadeIn, fadeOut } from '@/filters/fade'
+// import { assetsManager } from '@/managers/assets-manager'
+// import { effectsManager } from '@/managers/effects-manager'
+// import { tickerManager } from '@/managers/ticker-manager'
+// import { centerView, row } from '@/utils/layout'
 // // import { onExit, onReturn } from './actions'
 
 // export class LoadMenu {

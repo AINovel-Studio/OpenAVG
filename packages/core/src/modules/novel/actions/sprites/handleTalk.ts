@@ -1,8 +1,8 @@
-import type { ITalkRaw } from '@openavg/types'
+import type { ITalkRaw } from '@/types'
 import { Sprite } from 'pixi.js'
 
-import Hooks from '../../Hooks'
-import { soundManager } from '../../../../managers/sound-manager'
+import { soundManager } from '@/managers/sound-manager'
+import Hooks from '@/modules/novel/Hooks'
 
 export function handleTalk({ assetName }: { assetName: ITalkRaw }) {
   const hooks = Hooks.getInstance()

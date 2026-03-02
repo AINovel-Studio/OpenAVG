@@ -1,10 +1,10 @@
-import  { Application, Graphics } from 'pixi.js'
-import type { AssetsPacks } from '../../managers/assets-manager/assetsConfig'
+import type { Application } from 'pixi.js'
+import type { AssetsPacks } from '@/managers/assets-manager/assetsConfig'
+import { Container, Graphics } from 'pixi.js'
 
-import { Container } from 'pixi.js'
-import { assetsManager } from '../../managers/assets-manager'
-import Hooks from '../../modules/novel/Hooks'
-import { SceneManager } from '../../modules/novel/managers/scene-manager'
+import { assetsManager } from '@/managers/assets-manager'
+import Hooks from '@/modules/novel/Hooks'
+import { SceneManager } from '@/modules/novel/managers/scene-manager'
 
 export class NovelLayerManager {
   app: Application
@@ -35,7 +35,7 @@ export class NovelLayerManager {
         color: 'black',
       })
     this.blackBg.eventMode = 'none'
-    
+
     this.container.addChild(this.blackBg)
     this.container.addChild(this.sceneManager.container)
   }

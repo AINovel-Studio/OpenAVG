@@ -1,4 +1,4 @@
-import type { IActions, IBackground, IImage, IMusic, ITalkRaw } from '@openavg/types'
+import type { IActions, IBackground, IImage, IMusic, ITalkRaw } from '@/types'
 
 import { NovelActionType } from '../constants'
 import { handleBackground, handleImages, handleMusic, handleTalk } from './sprites'

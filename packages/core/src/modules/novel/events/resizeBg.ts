@@ -1,15 +1,15 @@
-import { eventManager } from '../../../managers/event-manager'
+import { adapterRegistry } from '@/adapters'
+import { eventManager } from '@/managers/event-manager'
 import Hooks from '../Hooks'
 
 function resizeBg() {
   const hooks = Hooks.getInstance()
-  const resizeObserver = new ResizeObserver(() => {
+  adapterRegistry.platform.observeElementResize('game-root', () => {
     const bgSprite = hooks.sceneManager.currentScene?.background
     if (bgSprite) {
       hooks.resizeImage({ image: bgSprite })
     }
   })
-  resizeObserver.observe(document.getElementById('game-root'))
 }
 
 eventManager.install({

@@ -1,9 +1,9 @@
-import type { IAssets, IGlobalConfig } from '@openavg/types'
-
 import type { Application } from 'pixi.js'
+
+import type { IAssets, IGlobalConfig } from '@/types'
 import { Assets } from 'pixi.js'
-import { GlobalProgressBar } from '../../components/progressBar'
-import { StageType } from '../../constants'
+import { GlobalProgressBar } from '@/components/progressBar'
+import { StageType } from '@/constants'
 import { AssetsPacks } from './assetsConfig'
 
 class AssetsManager {

@@ -1,6 +1,6 @@
-import type { IEvent } from '@openavg/types'
 import type { Application } from 'pixi.js'
-import { stageManager } from '../../stage'
+import type { IEvent } from '@/types'
+import { stageManager } from '@/stage'
 
 class EventManager {
   app: Application

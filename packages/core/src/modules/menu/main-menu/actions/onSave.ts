@@ -1,6 +1,6 @@
+import { StageType } from '@/constants'
+import { stageManager } from '@/stage'
 import { mainMenu } from '..'
-import { StageType } from '../../../../constants'
-import { stageManager } from '../../../../stage'
 
 export async function onSave(fn: () => Promise<void>) {
   mainMenu.stopEffects()

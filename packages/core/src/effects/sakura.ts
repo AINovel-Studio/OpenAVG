@@ -6,6 +6,7 @@ import {
   Sprite,
   Texture,
 } from 'pixi.js'
+import { adapterRegistry } from '../adapters'
 import { effectsManager } from '../managers/effects-manager'
 import { tickerManager } from '../managers/ticker-manager'
 
@@ -55,10 +56,11 @@ class Sakura {
     this.sprite.y = this.y
     this.sprite.rotation = this.r
 
+    const viewport = adapterRegistry.platform.getViewportSize()
     if (
-      this.x > window.innerWidth
+      this.x > viewport.width
       || this.x < 0
-      || this.y > window.innerHeight
+      || this.y > viewport.height
       || this.y < 0
     ) {
       this.r = getRandom('fnr')
@@ -68,7 +70,7 @@ class Sakura {
         this.s = getRandom('s')
         this.r = getRandom('r')
       } else {
-        this.x = window.innerWidth
+        this.x = viewport.width
         this.y = getRandom('y')
         this.s = getRandom('s')
         this.r = getRandom('r')
@@ -100,12 +102,13 @@ class SakuraList {
 function getRandom(option: string): any {
   let ret: any
   let random: number
+  const viewport = adapterRegistry.platform.getViewportSize()
   switch (option) {
     case 'x':
-      ret = Math.random() * window.innerWidth
+      ret = Math.random() * viewport.width
       break
     case 'y':
-      ret = Math.random() * window.innerHeight
+      ret = Math.random() * viewport.height
       break
     case 's':
       ret = Math.random()

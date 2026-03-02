@@ -1,15 +1,15 @@
 import type { Application } from 'pixi.js'
-import type { AssetsPacks } from '../../managers/assets-manager/assetsConfig'
+import type { AssetsPacks } from '@/managers/assets-manager/assetsConfig'
 
 import { Container, Graphics } from 'pixi.js'
 
-import { assetsManager } from '../../managers/assets-manager'
-import { mainMenu } from '../../modules/menu/main-menu'
+import { assetsManager } from '@/managers/assets-manager'
+import { mainMenu } from '@/modules/menu/main-menu'
 
-// import { configMenu } from '../../modules/menu/config-menu'
-// import { galleryMenu } from '../../modules/menu/gallery-menu'
-// import { loadMenu } from '../../modules/menu/archive-menu'
-// import { saveMenu } from '../../modules/menu/save-menu'
+// import { configMenu } from '@/modules/menu/config-menu'
+// import { galleryMenu } from '@/modules/menu/gallery-menu'
+// import { loadMenu } from '@/modules/menu/archive-menu'
+// import { saveMenu } from '@/modules/menu/save-menu'
 
 export class MenuLayerManager {
   app: Application

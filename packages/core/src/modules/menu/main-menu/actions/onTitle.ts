@@ -1,6 +1,6 @@
+import { StageType } from '@/constants'
+import { stageManager } from '@/stage'
 import { mainMenu } from '..'
-import { StageType } from '../../../../constants'
-import { stageManager } from '../../../../stage'
 
 interface IOnTitleInner {
   reset?: boolean
