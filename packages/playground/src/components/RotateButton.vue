@@ -32,7 +32,9 @@ const { rotate } = useGameRotation()
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(4px);
-  transition: background 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    transform 0.2s;
 }
 
 .rotate-btn:hover {

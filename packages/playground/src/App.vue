@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import type { CSSProperties } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { openAVGCore } from 'openavg'
 import { computed, onMounted, ref } from 'vue'
-import type { CSSProperties } from 'vue'
 import { fetchChapter, fetchChapterAssets, fetchGlobalConfig } from './api'
 import GameStage from './components/GameStage.vue'
 import PixiCanvas from './components/PixiCanvas.vue'
@@ -60,7 +60,10 @@ onMounted(() => {
 
 <template>
   <div id="game-viewport">
-    <div class="game-content" :style="gameStyle">
+    <div
+      class="game-content"
+      :style="gameStyle"
+    >
       <PixiCanvas @ready="onPixiReady" />
       <GameStage v-if="isInit" />
     </div>

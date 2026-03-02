@@ -1,7 +1,7 @@
-import { sound } from '@pixi/sound'
 import type { Sound } from '@pixi/sound'
 import type { Application } from 'pixi.js'
 import type { ISounds } from '@/types'
+import { sound } from '@pixi/sound'
 
 const UNLOCK_EVENTS = ['touchstart', 'touchend', 'click'] as const
 
@@ -95,8 +95,7 @@ class SoundManager {
     this.currentTargets.bgm.push(s)
     if (this.#unlocked) {
       s.play()
-    }
-    else {
+    } else {
       this.#pendingPlays.push({ sound: s, type: 'bgm' })
     }
   }
@@ -106,8 +105,7 @@ class SoundManager {
     this.currentTargets.voice.push(s)
     if (this.#unlocked) {
       s.play()
-    }
-    else {
+    } else {
       this.#pendingPlays.push({ sound: s, type: 'voice' })
     }
   }
