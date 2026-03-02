@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(gh api repos/YunYouJun/advjs --jq '{name: .name, description: .description, language: .language, default_branch: .default_branch, topics: .topics}')",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//private/tmp/advjs-research/**)"
+    ]
+  }
+}

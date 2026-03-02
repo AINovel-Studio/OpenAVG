@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { mainMenuActions } from 'openavg'
+import { menuActions } from 'openavg'
+import { useGameFullscreen } from '../composables/useGameFullscreen'
+
+const { toggle: toggleFullscreen } = useGameFullscreen()
 
 const buttons = [
-  { name: 'Fullscreen', onClick: () => mainMenuActions.onFullScreen() },
-  { name: 'Load', onClick: () => mainMenuActions.onLoad() },
-  { name: 'Save', onClick: () => mainMenuActions.onSave() },
-  { name: 'Configs', onClick: () => mainMenuActions.onConfig() },
-  { name: 'Title', onClick: () => mainMenuActions.onTitle() },
-  { name: 'Exit', onClick: () => mainMenuActions.onExit() },
+  { name: 'Fullscreen', onClick: () => toggleFullscreen() },
+  { name: 'Load', onClick: () => menuActions.onLoad() },
+  { name: 'Save', onClick: () => menuActions.onSave() },
+  { name: 'Configs', onClick: () => menuActions.onConfig() },
+  { name: 'Title', onClick: () => menuActions.onTitle() },
+  { name: 'Exit', onClick: () => menuActions.onExit() },
 ]
 </script>
 
@@ -17,7 +20,7 @@ const buttons = [
       <button
         v-for="(btn, index) in buttons"
         :key="index"
-        class="border-none w-120px bg-transparent c-white cursor-pointer font-size-16px py-2 px-4 hover:c-pink-300 transition-colors"
+        class="border-none w-120px bg-transparent c-white cursor-pointer font-size-20px py-12px ml-10px hover:c-pink-300 transition-colors"
         @click="btn.onClick"
       >
         {{ btn.name }}

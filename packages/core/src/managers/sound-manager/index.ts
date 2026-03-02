@@ -1,6 +1,14 @@
+import { sound } from '@pixi/sound'
 import type { Sound } from '@pixi/sound'
 import type { Application } from 'pixi.js'
 import type { ISounds } from '@/types'
+
+const UNLOCK_EVENTS = ['touchstart', 'touchend', 'click'] as const
+
+export interface PendingPlay {
+  sound: Sound
+  type: 'bgm' | 'voice'
+}
 
 class SoundManager {
   app: Application
@@ -15,11 +23,49 @@ class SoundManager {
     main: 1,
   }
 
+  #unlocked = false
+  #pendingPlays: PendingPlay[] = []
+
   constructor() {}
 
   init(app: Application) {
     this.app = app
+    this.#initUnlock()
     return this
+  }
+
+  /**
+   * iOS Safari 的 AudioContext 在用户交互前处于 suspended 状态
+   * 注册交互事件监听，在首次用户交互时恢复 AudioContext 并播放队列中的音频
+   */
+  #initUnlock() {
+    const audioCtx = sound.context?.audioContext
+    if (!audioCtx || audioCtx.state !== 'suspended') {
+      this.#unlocked = true
+      return
+    }
+
+    const unlock = () => {
+      if (this.#unlocked)
+        return
+      sound.context.audioContext.resume().then(() => {
+        this.#unlocked = true
+        this.#flushPending()
+      })
+      UNLOCK_EVENTS.forEach(e =>
+        document.removeEventListener(e, unlock, { capture: true }),
+      )
+    }
+
+    UNLOCK_EVENTS.forEach(e =>
+      document.addEventListener(e, unlock, { capture: true }),
+    )
+  }
+
+  #flushPending() {
+    const plays = [...this.#pendingPlays]
+    this.#pendingPlays.length = 0
+    plays.forEach(({ sound: s }) => s.play())
   }
 
   setVolume({
@@ -44,16 +90,26 @@ class SoundManager {
     })
   }
 
-  playBgm(sound: Sound) {
-    sound.volume = this.targetsVolume.bgm * this.targetsVolume.main
-    sound.play()
-    this.currentTargets.bgm.push(sound)
+  playBgm(s: Sound) {
+    s.volume = this.targetsVolume.bgm * this.targetsVolume.main
+    this.currentTargets.bgm.push(s)
+    if (this.#unlocked) {
+      s.play()
+    }
+    else {
+      this.#pendingPlays.push({ sound: s, type: 'bgm' })
+    }
   }
 
-  playVoice(sound: Sound) {
-    sound.volume = this.targetsVolume.voice * this.targetsVolume.main
-    sound.play()
-    this.currentTargets.voice.push(sound)
+  playVoice(s: Sound) {
+    s.volume = this.targetsVolume.voice * this.targetsVolume.main
+    this.currentTargets.voice.push(s)
+    if (this.#unlocked) {
+      s.play()
+    }
+    else {
+      this.#pendingPlays.push({ sound: s, type: 'voice' })
+    }
   }
 
   stopBgm() {
@@ -61,6 +117,7 @@ class SoundManager {
       bgm.stop()
     })
     this.currentTargets.bgm.length = 0
+    this.#pendingPlays = this.#pendingPlays.filter(p => p.type !== 'bgm')
   }
 
   stopVoice() {
@@ -68,6 +125,7 @@ class SoundManager {
       voice.stop()
     })
     this.currentTargets.voice.length = 0
+    this.#pendingPlays = this.#pendingPlays.filter(p => p.type !== 'voice')
   }
 
   stopMain() {

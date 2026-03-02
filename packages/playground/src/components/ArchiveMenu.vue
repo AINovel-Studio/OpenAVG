@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { SaveData, SaveDataList } from 'openavg'
 import {
-  archiveMenuActions,
-  mainMenuActions,
+  menuActions,
   stageManager,
 } from 'openavg'
 import { computed, nextTick, ref } from 'vue'
@@ -37,31 +36,32 @@ const currentPageItems = computed(() => {
 async function handleDataClick(i: number, type: string, hasSaveData: boolean) {
   if (type === 'save') {
     await sceneManager.value?.saveGame(i)
-    dataList.value = await archiveMenuActions.getDataList()
+    dataList.value = await menuActions.getSaveDataList()
   } else if (hasSaveData) {
     await handleReturn()
     await sceneManager.value?.loadGame({ i, isMainMenu: isMainMenuContext.value })
   }
 }
 
-mainMenuActions.installOnLoad((saveGameList, isMainMenu) => {
-  title.value = 'Load'
-  isShown.value = true
-  isMainMenuContext.value = isMainMenu
-  currentPage.value = 1
-  dataList.value = saveGameList
-})
-
-mainMenuActions.installOnSave((saveGameList) => {
-  title.value = 'Save'
-  isShown.value = true
-  currentPage.value = 1
-  dataList.value = saveGameList
+menuActions.install({
+  onLoad: (saveGameList: SaveDataList, isMainMenu: boolean) => {
+    title.value = 'Load'
+    isShown.value = true
+    isMainMenuContext.value = isMainMenu
+    currentPage.value = 1
+    dataList.value = saveGameList
+  },
+  onSave: (saveGameList: SaveDataList) => {
+    title.value = 'Save'
+    isShown.value = true
+    currentPage.value = 1
+    dataList.value = saveGameList
+  },
 })
 
 async function handleReturn() {
   isShown.value = false
-  await archiveMenuActions.onReturn()
+  await menuActions.returnToPreviousStage()
   setTimeout(() => {
     currentPage.value = 1
   }, 500)
@@ -148,7 +148,7 @@ function formatTime(timestamp: number) {
         </button>
         <button
           class="border-rounded-40px border-none w-150px py-3 bg-pink-500 c-white font-size-18px cursor-pointer hover:bg-pink-600 transition-colors"
-          @click="mainMenuActions.onExit()"
+          @click="menuActions.onExit()"
         >
           Exit
         </button>

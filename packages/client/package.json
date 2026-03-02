@@ -1,0 +1,30 @@
+{
+  "name": "@openavg/client",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --mode staging",
+    "mock": "vite --mode mock",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@openavg/core": "workspace:*",
+    "@openavg/types": "workspace:*",
+    "dayjs": "catalog:prod",
+    "pixi.js": "catalog:prod",
+    "react": "catalog:prod",
+    "react-dom": "catalog:prod",
+    "unocss": "catalog:dev",
+    "zustand": "catalog:prod"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:dev",
+    "@types/react-dom": "catalog:dev",
+    "@vitejs/plugin-react-swc": "catalog:dev",
+    "globals": "catalog:dev",
+    "typescript": "catalog:dev",
+    "vite": "catalog:dev"
+  }
+}

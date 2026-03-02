@@ -92,10 +92,9 @@ export { ApiEnum, StageType } from './constants'
 // 事件管理器
 export { eventManager } from './managers/event-manager'
 
-export { actions as archiveMenuActions } from './modules/menu/archive-menu/actions'
-export { actions as configMenuActions } from './modules/menu/config-menu/actions'
 // 菜单 Actions
-export { actions as mainMenuActions } from './modules/menu/main-menu/actions'
+export { menuActions } from './modules/menu/actions'
+export type { MenuHooks } from './modules/menu/actions'
 
 // Pixi
 export { PixiInstance } from './pixi'

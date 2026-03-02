@@ -35,6 +35,7 @@ export class StageManager {
   private isRender = false
   private videoSprite: Sprite | null
   private videoTimeout: NodeJS.Timeout | null
+  private videoResolve: (() => void) | null = null
 
   // 责任链：bef -> render -> aft
   beforeRenderCb = new Set<() => void>()
@@ -132,15 +133,11 @@ export class StageManager {
 
   async playVideo() {
     return new Promise<void>((resolve) => {
+      this.videoResolve = resolve
       this.app.stage.addChild(this.videoSprite)
-      this.videoSprite.eventMode = 'static'
-      this.videoSprite.onclick = () => {
-        this.skipVideo()
-        resolve()
-      }
+      this.eventManager.emit('videoPlay')
       this.videoTimeout = setTimeout(() => {
         this.skipVideo()
-        resolve()
       }, this.videoSprite.texture.source.resource.duration * 1000)
     })
   }
@@ -151,6 +148,9 @@ export class StageManager {
       this.videoTimeout = null
       this.app.stage.removeChild(this.videoSprite)
     }
+    this.eventManager.emit('videoEnd')
+    this.videoResolve?.()
+    this.videoResolve = null
   }
 
   private defaultCbInit() {

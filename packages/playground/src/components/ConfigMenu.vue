@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { configMenuActions, mainMenuActions, stageManager } from 'openavg'
+import { menuActions, stageManager } from 'openavg'
 import { ref, watch } from 'vue'
+import { useGameFullscreen } from '../composables/useGameFullscreen'
 
 const isShown = ref(false)
-const isFullscreen = ref(false)
+const { isFullscreen, toggle: toggleFullscreen } = useGameFullscreen()
 const language = ref('en')
 const mainVolume = ref(100)
 const bgmVolume = ref(40)
 const voiceVolume = ref(100)
 
-mainMenuActions.installOnConfig(() => {
-  isShown.value = true
+menuActions.install({
+  onConfig: () => {
+    isShown.value = true
+  },
 })
 
 function syncVolume() {
@@ -25,18 +28,9 @@ watch([mainVolume, bgmVolume, voiceVolume], () => {
   syncVolume()
 })
 
-function handleFullscreenToggle() {
-  isFullscreen.value = !isFullscreen.value
-  if (isFullscreen.value) {
-    document.documentElement.requestFullscreen?.()
-  } else {
-    document.exitFullscreen?.()
-  }
-}
-
 async function handleReturn() {
   isShown.value = false
-  await configMenuActions.onReturn()
+  await menuActions.returnToPreviousStage()
 }
 </script>
 
@@ -97,7 +91,7 @@ async function handleReturn() {
             <button
               class="w-full py-4 text-xl font-semibold rounded-lg c-white transition-colors"
               :class="isFullscreen ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'"
-              @click="handleFullscreenToggle"
+              @click="toggleFullscreen"
             >
               {{ isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen' }}
             </button>
@@ -135,7 +129,7 @@ async function handleReturn() {
         </button>
         <button
           class="border-rounded-40px border-none w-150px py-3 bg-pink-500 c-white font-size-18px cursor-pointer hover:bg-pink-600 transition-colors"
-          @click="mainMenuActions.onExit()"
+          @click="menuActions.onExit()"
         >
           Exit
         </button>

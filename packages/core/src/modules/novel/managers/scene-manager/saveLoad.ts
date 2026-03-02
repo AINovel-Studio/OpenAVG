@@ -74,9 +74,7 @@ export async function loadGame(sceneManager: any, {
 }) {
   if (isMainMenu) {
     tickerManager.clearListeners()
-    const mainMenu = stageManager.layerManagers.menuLayer.menus.mainMenu
     stageManager.currentStage = StageType.NOVEL
-    await mainMenu.hide()
   }
 
   let data: SaveData
