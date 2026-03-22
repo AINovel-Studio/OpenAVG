@@ -1,12 +1,12 @@
 {
-  "name": "openavg",
+  "name": "@openavg/core",
   "type": "module",
   "version": "0.1.0",
   "description": "A universal adventure game engine based on PixiJS",
   "author": {
     "name": "Panzer_Jack",
     "email": "panzer_jack@panzer-jack.cn",
-    "url": "https://www.panzer-jack.cn"
+    "url": "https://blog.panzer-jack.cn"
   },
   "license": "MPL-2.0",
   "homepage": "https://github.com/AINovel-Studio/OpenAVG",
@@ -38,6 +38,7 @@
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
+    "publish": "npm publish --access=public",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
