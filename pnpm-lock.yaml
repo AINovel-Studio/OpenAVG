@@ -121,8 +121,8 @@ importers:
   packages/playground:
     dependencies:
       '@openavg/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: latest
+        version: 0.1.2(@pixi/sound@6.0.1(pixi.js@8.17.1))(pixi.js@8.17.1)
       '@pixi/sound':
         specifier: ^6.0.1
         version: 6.0.1(pixi.js@8.17.1)
@@ -760,6 +760,12 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@openavg/core@0.1.2':
+    resolution: {integrity: sha512-PHDDctK6zOe50kkQbfIvZkx5fw0q7MDMH34blj7N6yMJ0K+3w50pQyQ1yAnZXyPqH0qMek1Kg1BZ2U3+ckbsUA==}
+    peerDependencies:
+      '@pixi/sound': ^6.0.0
+      pixi.js: ^8.0.0
 
   '@oxfmt/binding-android-arm-eabi@0.35.0':
     resolution: {integrity: sha512-BaRKlM3DyG81y/xWTsE6gZiv89F/3pHe2BqX2H4JbiB8HNVlWWtplzgATAE5IDSdwChdeuWLDTQzJ92Lglw3ZA==}
@@ -4019,6 +4025,17 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@openavg/core@0.1.2(@pixi/sound@6.0.1(pixi.js@8.17.1))(pixi.js@8.17.1)':
+    dependencies:
+      '@pixi/layout': 2.0.1(pixi.js@8.17.1)
+      '@pixi/sound': 6.0.1(pixi.js@8.17.1)
+      '@pixi/ui': 2.3.2(pixi.js@8.17.1)
+      '@tweenjs/tween.js': 25.0.0
+      dayjs: 1.11.20
+      localforage: 1.10.0
+      pixi-filters: 6.1.5(pixi.js@8.17.1)
+      pixi.js: 8.17.1
 
   '@oxfmt/binding-android-arm-eabi@0.35.0':
     optional: true
