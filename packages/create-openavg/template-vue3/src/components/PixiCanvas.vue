@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { openAVGCore } from 'openavg'
+import { openAVGCore } from '@openavg/core'
 import { onMounted, ref } from 'vue'
 
 const emit = defineEmits<{

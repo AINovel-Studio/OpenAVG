@@ -10,9 +10,9 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@openavg/core": "workspace:*",
     "@pixi/sound": "catalog:prod",
     "@vueuse/core": "catalog:",
-    "openavg": "workspace:*",
     "pixi.js": "catalog:prod",
     "vue": "catalog:"
   },

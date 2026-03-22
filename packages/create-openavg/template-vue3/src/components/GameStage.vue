@@ -3,7 +3,7 @@ import {
   eventManager,
   stageManager,
   StageType,
-} from 'openavg'
+} from '@openavg/core'
 import { onMounted, onUnmounted, ref } from 'vue'
 import ArchiveMenu from './ArchiveMenu.vue'
 import ConfigMenu from './ConfigMenu.vue'

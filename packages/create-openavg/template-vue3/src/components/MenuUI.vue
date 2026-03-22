@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { menuActions } from 'openavg'
+import { menuActions } from '@openavg/core'
 import { useGameFullscreen } from '../composables/useGameFullscreen'
 
 const { toggle: toggleFullscreen } = useGameFullscreen()

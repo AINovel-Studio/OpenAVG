@@ -10,18 +10,18 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-      "@pixi/sound": "^6.0.1",
-      "@vueuse/core": "^14.2.1",
-      "openavg": "latest",
-      "pixi.js": "^8.8.0",
-      "vue": "^3.5.13"
+    "@openavg/core": "latest",
+    "@pixi/sound": "^6.0.1",
+    "@vueuse/core": "^14.2.1",
+    "pixi.js": "^8.8.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-      "@panzerjack/eslint-config": "latest",
-      "@vitejs/plugin-vue": "^5.2.1",
-      "typescript": "^5.7.3",
-      "unocss": "^0.65.4",
-      "vite": "^6.0.0",
-      "vue-tsc": "^2.2.0"
+    "@panzerjack/eslint-config": "latest",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "^5.7.3",
+    "unocss": "^0.65.4",
+    "vite": "^6.0.0",
+    "vue-tsc": "^2.2.0"
   }
 }

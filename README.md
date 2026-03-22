@@ -31,7 +31,6 @@ pnpm dev
 OpenAVG/
 ├── packages/
 │   ├── core/              # 引擎核心库
-│   ├── client/            # 游戏客户端示例
 │   ├── playground/        # 开发测试环境
 │   └── create-openavg/    # 项目脚手架
 ```

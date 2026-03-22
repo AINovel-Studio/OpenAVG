@@ -4,27 +4,8 @@
 
 ## 使用
 
-推荐npx：
-
 ```bash
 npx @openavg/create-openavg my-game
-```
-
-```bash
-# 使用 pnpm
-pnpm create openavg
-
-# 使用 npm
-npm create openavg
-
-# 使用 yarn
-yarn create openavg
-```
-
-## 指定项目名称
-
-```bash
-pnpm create openavg my-game
 ```
 
 ## 功能特性

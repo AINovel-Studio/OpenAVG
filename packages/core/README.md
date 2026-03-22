@@ -14,13 +14,13 @@ OpenAVG 游戏引擎核心库。
 ## 安装
 
 ```bash
-pnpm add openavg
+pnpm add @openavg/core
 ```
 
 ## 基础使用
 
 ```typescript
-import { GameManager } from 'openavg'
+import { GameManager } from '@openavg/core'
 
 const game = new GameManager({
   container: document.getElementById('app'),

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { useWindowSize } from '@vueuse/core'
-import { openAVGCore } from 'openavg'
+import { openAVGCore } from '@openavg/core'
 import { computed, onMounted, ref } from 'vue'
 import { fetchChapter, fetchChapterAssets, fetchGlobalConfig } from './api'
 import GameStage from './components/GameStage.vue'

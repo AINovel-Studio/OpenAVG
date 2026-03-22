@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { SaveData, SaveDataList } from 'openavg'
+import type { SaveData, SaveDataList } from '@openavg/core'
 import {
   menuActions,
   stageManager,
-} from 'openavg'
+} from '@openavg/core'
 import { computed, nextTick, ref } from 'vue'
 
 const total = 72

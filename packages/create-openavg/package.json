@@ -1,7 +1,7 @@
 {
   "name": "@openavg/create-openavg",
   "type": "module",
-  "version": "1.17.1",
+  "version": "0.1.0",
   "packageManager": "pnpm@9.15.5",
   "description": "A CLI tool to create OpenAVG projects",
   "author": {
@@ -15,7 +15,7 @@
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "types": "./dist/index.d.ts",
   "bin": {
     "create-openavg": "index.js",
     "co": "index.js"
@@ -24,10 +24,10 @@
     "node": ">= 22"
   },
   "scripts": {
-    "build": "tsdown",
-    "start": "tsdown && pnpm img2ascii && node ./index.js",
+    "build": "tsup",
+    "start": "tsup && pnpm img2ascii && node ./index.js",
     "img2ascii": "node ./scripts/img2ascii.js",
-    "dev": "tsdown --watch",
+    "dev": "tsup --watch",
     "lint": "eslint . --fix",
     "publish": "npm publish",
     "typecheck": "tsc --noEmit"
@@ -45,7 +45,7 @@
     "img-ascii-term": "catalog:",
     "mri": "catalog:",
     "picocolors": "catalog:",
-    "tsdown": "catalog:",
+    "tsup": "catalog:dev",
     "typescript": "catalog:conflicts_dev_h5_9_3"
   }
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { menuActions, stageManager } from 'openavg'
+import { menuActions, stageManager } from '@openavg/core'
 import { ref, watch } from 'vue'
 import { useGameFullscreen } from '../composables/useGameFullscreen'
 

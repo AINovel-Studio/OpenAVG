@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { SaveDataList } from 'openavg'
-import { menuActions, openAVGCore, stageManager } from 'openavg'
+import type { SaveDataList } from '@openavg/core'
+import { menuActions, openAVGCore, stageManager } from '@openavg/core'
 import { computed, onMounted, ref } from 'vue'
 
 const isShown = ref(true)

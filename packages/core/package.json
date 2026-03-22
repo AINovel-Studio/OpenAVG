@@ -1,7 +1,7 @@
 {
   "name": "@openavg/core",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A universal adventure game engine based on PixiJS",
   "author": {
     "name": "Panzer_Jack",
