@@ -6,6 +6,7 @@ export default panzerjack({
   formatters: true,
   markdown: false,
   rules: {
+    "pnpm/json-enforce-catalog": "off",
     'no-console': 'off',
     'no-irregular-whitespace': 'off',
     'style/no-tabs': 'off',

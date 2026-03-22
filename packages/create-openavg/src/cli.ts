@@ -73,21 +73,12 @@ async function collectUserInput(argv: CliOptions): Promise<UserConfig | null> {
     }
   }
 
-  // 2. 是否安装依赖
-  const shouldInstall = await prompts.confirm({
-    message: messages.shouldInstall,
-    initialValue: true,
-  })
-  if (prompts.isCancel(shouldInstall))
-    return null
-
-  // 3. 计算目标目录
+  // 2. 计算目标目录
   const targetDir = path.join(process.cwd(), projectName)
 
   return {
     projectName,
     targetDir,
-    shouldInstall: shouldInstall as boolean,
   }
 }
 
@@ -133,14 +124,14 @@ function showVersion(): void {
  * 显示成功提示信息
  */
 function showSuccessMessage(config: UserConfig): void {
-  const { targetDir, shouldInstall } = config
+  const { targetDir } = config
   const cdPath = path.relative(process.cwd(), targetDir)
 
   const nextSteps = [
     `cd ${cdPath}`,
-    !shouldInstall && 'pnpm install',
+    'pnpm install',
     'pnpm dev',
-  ].filter(Boolean)
+  ]
 
   prompts.outro(
     colors.green(`
