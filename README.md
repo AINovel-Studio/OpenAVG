@@ -2,7 +2,7 @@
 
 一个基于 Vue3 + Pixi.js 的通用冒险游戏引擎，可以制作 Galgame 和 RPG。
 
-[在线演示](https://demo.openavg.panzer-jack.cn/) | [引擎文档](https://doc.openavg.panzer-jack.cn/)
+[在线演示](https://demo.openavg.panzer-jack.cn/) | [引擎文档（TODO）](https://doc.openavg.panzer-jack.cn/)
 
 <img width="1440" alt="image" src="https://github.com/user-attachments/assets/dace964a-35e4-491f-ba03-0746a6e10893" />
 
