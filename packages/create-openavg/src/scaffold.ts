@@ -1,9 +1,9 @@
 import type { UserConfig } from './types'
+import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import * as prompts from '@clack/prompts'
 import colors from 'picocolors'
-import spawn from 'cross-spawn'
 import { copyTemplate, ensureDir, handleExistingDir } from './utils/file'
 import { getTemplateDir, replaceInFile } from './utils/template'
 
@@ -64,9 +64,9 @@ async function installDependencies(targetDir: string): Promise<void> {
 
   try {
     // 检测包管理器
-    const { detectAgent } = await import('@vercel/detect-agent')
-    const agent = await detectAgent(targetDir)
-    const packageManager = agent || 'npm'
+    const { determineAgent } = await import('@vercel/detect-agent')
+    const agentResult = await determineAgent()
+    const packageManager = agentResult?.agent?.name || 'npm'
 
     prompts.log.info(`使用 ${packageManager} 安装依赖`)
 
@@ -75,9 +75,10 @@ async function installDependencies(targetDir: string): Promise<void> {
       const child = spawn(packageManager, ['install'], {
         cwd: targetDir,
         stdio: 'inherit',
+        shell: true,
       })
 
-      child.on('close', (code) => {
+      child.on('close', (code: number | null) => {
         code !== 0 ? reject(new Error(`退出码: ${code}`)) : resolve()
       })
 
