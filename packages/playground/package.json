@@ -10,7 +10,7 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-    "@openavg/core": "workspace:*",
+    "@openavg/core": "latest",
     "@pixi/sound": "^6.0.1",
     "@vueuse/core": "^14.2.1",
     "pixi.js": "^8.8.0",
