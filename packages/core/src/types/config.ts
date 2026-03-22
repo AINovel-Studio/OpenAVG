@@ -1,0 +1,46 @@
+import type { Sound } from '@pixi/sound'
+import type { Application } from 'pixi.js'
+import type { IChapter } from './novel'
+
+export interface IAsset {
+  name: string
+  src: string
+}
+
+export interface IEffect {
+  start: (app: Application) => void
+  stop: (app: Application) => void
+}
+
+export interface ISounds {
+  bgm?: Sound[]
+  voice?: Sound[]
+}
+
+export type IEvent<T> = ({
+  app,
+  stageManager,
+}: {
+  app: Application
+  stageManager: T
+}) => void
+
+export interface IAssets {
+  images?: IAsset[]
+  audios?: IAsset[]
+  voices?: IAsset[]
+  videos?: IAsset[]
+}
+
+export interface IGlobalConfig {
+  title: string
+  favicon: string
+  assets: IAssets
+}
+
+export interface IApiCore {
+  fetchGlobalConfig: () => Promise<IGlobalConfig>
+  fetchChapter: ({ name }: { name: string }) => Promise<IChapter>
+  fetchChapterAssets: () => Promise<IAssets>
+  [name: string]: (params: any) => Promise<any>
+}

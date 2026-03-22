@@ -1,0 +1,26 @@
+{
+  "name": "@openavg/playground",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix"
+  },
+  "dependencies": {
+    "@openavg/core": "workspace:*",
+    "@pixi/sound": "catalog:prod",
+    "@vueuse/core": "catalog:",
+    "pixi.js": "catalog:prod",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:dev",
+    "unocss": "catalog:dev",
+    "vite": "catalog:dev",
+    "vue-tsc": "catalog:"
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "moduleResolution": "Node",
-    "declaration": true,
-    "outDir": "./dist" // 指定输出目录
-  },
-  "include": ["src/**/*.ts"]
-}

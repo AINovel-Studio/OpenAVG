@@ -14,8 +14,8 @@ class GalleryMenu {
 
   init({
     app,
-        fatherContainer,
-        assetsPack,
+    fatherContainer,
+    assetsPack,
   }: {
     app: Application
     fatherContainer: Container

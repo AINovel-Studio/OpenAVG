@@ -1,7 +1,7 @@
-import { debounce } from 'lodash'
-import { StageType } from '../../../constants'
-import { eventManager } from '../../../managers/event-manager'
-import { stageManager } from '../../../stage'
+import { StageType } from '@/constants'
+import { eventManager } from '@/managers/event-manager'
+import { stageManager } from '@/stage'
+import { debounce } from '@/utils/debounce'
 import { SceneClickEvents } from '../constants'
 import Hooks from '../Hooks'
 

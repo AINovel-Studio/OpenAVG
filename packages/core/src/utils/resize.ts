@@ -1,5 +1,5 @@
-import type { IPosition } from '@openavg/types'
 import type { Application, Container, Sprite } from 'pixi.js'
+import type { IPosition } from '../types'
 
 // 背景图片自适应屏幕，但不超出屏幕
 export function resizeToCanvas({

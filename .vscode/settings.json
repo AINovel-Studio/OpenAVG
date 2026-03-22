@@ -1,33 +1,65 @@
 {
-  "editor.fontVariations": false,
-  "eslint.format.enable": true,
-  "eslint.codeActionsOnSave.rules": null,
-  // 禁用默认格式化工具（Prettier 或其他）
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
   "editor.formatOnSave": false,
-
   // Auto fix
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
-
   // Silent the stylistic rules in you IDE, but still auto fix them
-  // "eslint.rules.customizations": [
-  //   { "rule": "style/*", "severity": "off", "fixable": true },
-  //   { "rule": "format/*", "severity": "off", "fixable": true },
-  //   { "rule": "*-indent", "severity": "off", "fixable": true },
-  //   { "rule": "*-spacing", "severity": "off", "fixable": true },
-  //   { "rule": "*-spaces", "severity": "off", "fixable": true },
-  //   { "rule": "*-order", "severity": "off", "fixable": true },
-  //   { "rule": "*-dangle", "severity": "off", "fixable": true },
-  //   { "rule": "*-newline", "severity": "off", "fixable": true },
-  //   { "rule": "*quotes", "severity": "off", "fixable": true },
-  //   { "rule": "*semi", "severity": "off", "fixable": true }
-  // ],
-
+  "eslint.rules.customizations": [
+    {
+      "rule": "style/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "format/*",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-indent",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spacing",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-spaces",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-order",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-dangle",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*-newline",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*quotes",
+      "severity": "off",
+      "fixable": true
+    },
+    {
+      "rule": "*semi",
+      "severity": "off",
+      "fixable": true
+    }
+  ],
   // Enable eslint for all supported languages
   "eslint.validate": [
     "javascript",
@@ -38,7 +70,6 @@
     "html",
     "markdown",
     "json",
-    "json5",
     "jsonc",
     "yaml",
     "toml",
@@ -52,5 +83,13 @@
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "eslint.useFlatConfig": true,
+  "eslint.enable": true,
+	"eslint.format.enable": true,
 }

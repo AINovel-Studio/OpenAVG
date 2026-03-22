@@ -1,0 +1,51 @@
+{
+  "name": "@openavg/create-openavg",
+  "type": "module",
+  "version": "0.1.1",
+  "packageManager": "pnpm@9.15.5",
+  "description": "A CLI tool to create OpenAVG projects",
+  "author": {
+    "name": "Panzer_Jack",
+    "email": "panzer_jack@panzer-jack.cn",
+    "url": "https://blog.panzer-jack.cn"
+  },
+  "exports": {
+    ".": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "create-openavg": "index.js",
+    "co": "index.js"
+  },
+  "engines": {
+    "node": ">= 22"
+  },
+  "scripts": {
+    "build": "tsup",
+    "start": "tsup && pnpm img2ascii && node ./index.js",
+    "img2ascii": "node ./scripts/img2ascii.js",
+    "dev": "tsup --watch",
+    "lint": "eslint . --fix",
+    "publish": "npm publish --access=public",
+    "typecheck": "tsc --noEmit"
+  },
+  "optionalDependencies": {
+    "canvas": "^3.2.1"
+  },
+  "devDependencies": {
+    "@clack/prompts": "catalog:",
+    "@types/node": "catalog:conflicts_dev_h25_0_3",
+    "@vercel/detect-agent": "catalog:",
+    "chalk": "catalog:conflicts_prod_h5_6_2",
+    "cross-spawn": "catalog:",
+    "eslint-plugin-format": "catalog:conflicts_dev_h1_3_1",
+    "img-ascii-term": "catalog:",
+    "mri": "catalog:",
+    "picocolors": "catalog:",
+    "tsup": "catalog:dev",
+    "typescript": "catalog:conflicts_dev_h5_9_3"
+  }
+}

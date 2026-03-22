@@ -1,17 +1,13 @@
-import type { IActions, IChapter, IScene, ISceneContainers, ISceneRaw, SaveData, SaveDataList } from '@openavg/types'
 import type { Application } from 'pixi.js'
+import type { IActions, IChapter, IScene, ISceneContainers, ISceneRaw, SaveData } from '@/types'
 import { sound } from '@pixi/sound'
 
-import dayjs from 'dayjs'
-import localforage from 'localforage'
-import { Container, RenderTexture } from 'pixi.js'
+import { Container } from 'pixi.js'
 
-import { ApiEnum, openAVGCore, stageManager, StageType } from '../../../../../src'
-import { apiManager } from '../../../../managers/api-manager'
-import { execActions } from '../../actions'
-import { DialogueBox } from '../../components/dialogueBox'
-import '../../events'
-import { tickerManager } from '../../../../managers/ticker-manager'
+import { execActions } from '@/modules/novel/actions'
+import { DialogueBox } from '@/modules/novel/components/dialogueBox'
+import { loadGame as _loadGame, saveGame as _saveGame } from './saveLoad'
+import '@/modules/novel/events'
 
 export class SceneManager {
   app: Application
@@ -79,7 +75,7 @@ export class SceneManager {
   async initChapter({
     chapter,
     isLoad = false,
-    actionsImp
+    actionsImp,
   }: {
     chapter: IChapter
     isLoad?: boolean
@@ -179,110 +175,14 @@ export class SceneManager {
   }
 
   async saveGame(id: number) {
-    const renderTexture = RenderTexture.create({
-      width: this.app.canvas.width,
-      height: this.app.canvas.height,
-    })
-    this.dialogueBox.hide()
-    this.app.renderer.render(this.app.stage, { renderTexture })
-    const imgRaw = await this.app.renderer.extract.image(renderTexture)
-
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    canvas.width = 288
-    canvas.height = 162
-    ctx.drawImage(imgRaw, 0, 0, canvas.width, canvas.height)
-    const img = canvas.toDataURL('image/webp', 0.5)
-
-    const title = this.chapter && this.chapter.title
-    const sceneName = this.currentScene && this.currentScene.sceneName
-    const filename = this.chapter && this.chapter.filename
-    const time = dayjs().valueOf()
-    const currentActionsId = this.currentScene && this.currentScene.currentActionsId - 1
-    const currentSceneId = this.currentSceneId
-
-    const backgroundAction = this.currentScene && this.currentScene.backgroundAction
-    const musicAction = this.currentScene && this.currentScene.musicAction
-    const imagesAction = this.currentScene && this.currentScene.imagesAction
-    const currentSprites = {
-      backgroundAction,
-      musicAction,
-      imagesAction,
-    }
-
-    const data: SaveData = {
-      title,
-      filename,
-      sceneName,
-      img,
-      time,
-      currentActionsId,
-      currentSceneId,
-      currentSprites,
-    }
-    this.dialogueBox.show()
-
-    const saveDataList: SaveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`) || {}
-
-    // 0 为最新存档
-    if (!saveDataList[0] || saveDataList[0].time <= data.time) {
-      saveDataList[0] = data
-    }
-
-    const saveData = {
-      ...saveDataList,
-      [id]: data,
-    }
-
-    localforage.setItem(`${openAVGCore.gameTitle}-saveGame`, saveData)
+    return _saveGame(this, id)
   }
 
-  async loadGame({
-    saveData,
-    i,
-    isMainMenu = false
-  }: {
+  async loadGame(options: {
     saveData?: SaveData
     i?: number
     isMainMenu?: boolean
   }) {
-
-    if(isMainMenu) {
-      tickerManager.clearListeners()
-      const mainMenu = stageManager.layerManagers.menuLayer.menus.mainMenu
-      stageManager.currentStage = StageType.NOVEL
-      await mainMenu.hide()
-  }
-
-    let data: SaveData
-    if (saveData) {
-      data = saveData
-    } else {
-      const saveDataList = await localforage.getItem(`${openAVGCore.gameTitle}-saveGame`)
-      data = saveDataList[i]
-    }
-
-    this.reset()
-
-    const filename = data.filename
-    this.chapter = await apiManager.fetch({
-      name: ApiEnum.fetchChapter,
-      params: { name: filename },
-    })
-
-    this.currentSceneId = data.currentSceneId
-    this.currentScene.sceneName = data.sceneName
-    this.currentScene.currentActionsId = data.currentActionsId
-    this.currentScene.currentSceneId = data.currentSceneId
-    this.currentScene.actionsList = this.chapter.scenes[this.currentSceneId].actions
-
-    const actionsImp: IActions = {
-      background: data.currentSprites.backgroundAction,
-      music: data.currentSprites.musicAction,
-      images: data.currentSprites.imagesAction,
-      ...this.chapter.scenes[this.currentSceneId].actions[this.currentScene.currentActionsId],
-    }
-
-    await this.initChapter({ chapter: this.chapter, isLoad: true, actionsImp })
+    return _loadGame(this, options)
   }
 }

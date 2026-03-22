@@ -9,4 +9,11 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   tsconfig: 'tsconfig.json',
+  external: ['pixi.js', '@pixi/sound'],
+  treeshake: true,
+  esbuildOptions(options) {
+    options.alias = {
+      '@': './src',
+    }
+  },
 })
