@@ -1,7 +1,7 @@
 {
   "name": "@openavg/core",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A universal adventure game engine based on PixiJS",
   "author": {
     "name": "Panzer_Jack",
@@ -46,16 +46,16 @@
     "pixi.js": "^8.0.0"
   },
   "dependencies": {
-    "@pixi/layout": "catalog:prod",
-    "@pixi/ui": "catalog:prod",
-    "@tweenjs/tween.js": "catalog:prod",
-    "dayjs": "catalog:prod",
-    "localforage": "catalog:prod",
-    "pixi-filters": "catalog:prod"
+    "@pixi/layout": "^2.0.1",
+    "@pixi/ui": "^2.2.1",
+    "@tweenjs/tween.js": "^25.0.0",
+    "dayjs": "^1.11.13",
+    "localforage": "^1.10.0",
+    "pixi-filters": "^6.1.0"
   },
   "devDependencies": {
-    "@pixi/devtools": "catalog:",
-    "tsup": "catalog:dev",
-    "typescript": "catalog:dev"
+    "@pixi/devtools": "^2.0.1",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3"
   }
 }
