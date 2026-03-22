@@ -6,14 +6,16 @@
 
 ```bash
 npx @openavg/create-openavg my-game
+cd my-game
+pnpm install
+pnpm dev
 ```
 
 ## 功能特性
 
 - 🎮 基于 Vue3 + Vite + Pixi.js 的游戏项目模板
-- 📦 自动检测并使用合适的包管理器
-- ⚡️ 可选的依赖自动安装
 - 🎨 开箱即用的游戏菜单系统
+- ⚡️ 快速项目初始化
 
 ## 生成的项目结构
 
@@ -30,13 +32,6 @@ my-game/
 ├── package.json
 ├── vite.config.ts
 └── uno.config.ts
-```
-
-## 开发
-
-```bash
-cd my-game
-pnpm dev
 ```
 
 ## 文档

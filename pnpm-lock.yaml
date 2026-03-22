@@ -99,18 +99,9 @@ importers:
       '@types/node':
         specifier: ^22.17.0
         version: 22.19.15
-      '@vercel/detect-agent':
-        specifier: ^1.0.0
-        version: 1.2.1
       chalk:
         specifier: ^5.6.2
         version: 5.6.2
-      cross-spawn:
-        specifier: ^7.0.6
-        version: 7.0.6
-      eslint-plugin-format:
-        specifier: ^1.3.1
-        version: 1.5.0(eslint@9.39.4(jiti@2.6.1))
       img-ascii-term:
         specifier: 1.0.0
         version: 1.0.0
@@ -1303,10 +1294,6 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0
 
-  '@vercel/detect-agent@1.2.1':
-    resolution: {integrity: sha512-U/BJCltQSTFTHwaiCQQTQG3GonTbRoEewjV+OU2mMjcHLAoPOh6CP1SXA2XNmqiqI3c82nkRNJ7piZ14RqmTXw==}
-    engines: {node: '>=14'}
-
   '@vitejs/plugin-vue@5.2.4':
     resolution: {integrity: sha512-7Yx/SXSOcQq5HiiV3orevHUFn+pmMB4cgbEkDYgnkUWb0WfeQ/wa2yFv6D5ICiCQOVpjA7vYDXrC7AGO8yjDHA==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -1908,11 +1895,6 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=8'
-
-  eslint-plugin-format@1.5.0:
-    resolution: {integrity: sha512-jaeOKrxs79Nn6rMkLycPkLHvBVKcgsFG+RqNXb6W9iS9y2Q0NYGhFTLcDUdp5mf01X99wEkjtX2O8cumM7lNMQ==}
-    peerDependencies:
-      eslint: ^8.40.0 || ^9.0.0 || ^10.0.0
 
   eslint-plugin-format@2.0.1:
     resolution: {integrity: sha512-0BA65p5DAiuKtx5MmMJfPk9WaTjoHHbyVW7ZXRhaZoA1fdiMHhay9QRiDL2wr0hJWZxdF7CRThOK/70VUKVg2g==}
@@ -4578,8 +4560,6 @@ snapshots:
       - supports-color
       - vue
 
-  '@vercel/detect-agent@1.2.1': {}
-
   '@vitejs/plugin-vue@5.2.4(vite@6.4.1(@types/node@22.19.15)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))':
     dependencies:
       vite: 6.4.1(@types/node@22.19.15)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.3)
@@ -5312,19 +5292,6 @@ snapshots:
       '@eslint-community/regexpp': 4.12.2
       eslint: 9.39.4(jiti@2.6.1)
       eslint-compat-utils: 0.5.1(eslint@9.39.4(jiti@2.6.1))
-
-  eslint-plugin-format@1.5.0(eslint@9.39.4(jiti@2.6.1)):
-    dependencies:
-      '@dprint/formatter': 0.5.1
-      '@dprint/markdown': 0.21.1
-      '@dprint/toml': 0.7.0
-      eslint: 9.39.4(jiti@2.6.1)
-      eslint-formatting-reporter: 0.0.0(eslint@9.39.4(jiti@2.6.1))
-      eslint-parser-plain: 0.1.1
-      ohash: 2.0.11
-      oxfmt: 0.35.0
-      prettier: 3.8.1
-      synckit: 0.11.12
 
   eslint-plugin-format@2.0.1(eslint@9.39.4(jiti@2.6.1)):
     dependencies:

@@ -6,8 +6,6 @@ export interface UserConfig {
   projectName: string
   /** 目标目录（完整路径） */
   targetDir: string
-  /** 是否安装依赖 */
-  shouldInstall: boolean
 }
 
 /**
